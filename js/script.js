@@ -42,15 +42,15 @@ function evaluateRound(playerHand, computerHand) {
   let winner = "";
   if (playerHand === computerHand) {
      winner = "tie";
-  } else if (playerHand === 1) {
-     winner = (computerHand === 2) ? "computer" : "player";
-  } else if (playerHand === 2) {
-     winner = (computerHand === 3) ? "computer" : "player";
-  } else { //playerHand is 3
-     winner = (computerHand === 1) ? "computer" : "player";
+  } else if (playerHand === ROCK) {
+     winner = (computerHand === PAPER) ? "computer" : "player";
+  } else if (playerHand === PAPER) {
+     winner = (computerHand === SCISSORS) ? "computer" : "player";
+  } else { //playerHand is SCISSORS
+     winner = (computerHand === ROCK) ? "computer" : "player";
   }
 
-  return announceResults(winner);
+  return winner;
 }
 
 function announceResults(winner) {
@@ -63,5 +63,47 @@ function announceResults(winner) {
   }
 }
 
+function printCurrentScore(playerScore, computerScore) {
+  console.log(`Player score: ${playerScore}\r\nComputer score: ${computerScore}`);
+}
+
 /* Plays game for 5 rounds max */
-function game()
+function game() {
+  let userInput;
+  let result;
+  let playerWins = 0;
+  let computerWins = 0;
+  for (let i = 0; i < 5; i++) {
+    userInput = prompt("What's your move?");
+    if (userInput === null) {
+      console.log("Game Cancelled.");
+      return;
+    } else {
+      result = playRound(userInput);
+      if (result === "computer") {
+        computerWins++;
+        console.log("Computer won");
+        printCurrentScore(playerWins, computerWins);
+      } else if (result === "player") {
+        playerWins++;
+        console.log("Player won");
+        printCurrentScore(playerWins, computerWins);
+      } else {
+        computerWins++;
+        playerWins++;
+        console.log("Tie game");
+        printCurrentScore(playerWins, computerWins);
+      }
+    }
+
+    if (computerWins === 3) {
+      console.log("game over, computer wins.");
+      i = 5;
+    } else if (playerWins === 3) {
+      console.log("game over, player wins.");
+      i = 5;
+    } else if (playerWins === 5 && computerWins === 5) {
+      console.log("game over, tie.");
+    }
+  }
+}
