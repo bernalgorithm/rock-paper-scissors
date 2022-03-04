@@ -6,6 +6,5 @@
 </head>
 <body>
   <h1>Rock, Paper, Scissors!</h1>
-  <div>Making a change.</div>
   <script src="./js/script.js"></script>
 </body>
