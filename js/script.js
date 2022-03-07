@@ -1,6 +1,22 @@
 const ROCK = 1;
 const PAPER = 2;
 const SCISSORS = 3;
+let gameState = 0;
+
+document.getElementById("start").addEventListener("click", gameOn);
+
+/* occurs when player presses "Start Game" and activates game */
+function gameOn() {
+  gameState = 1;
+  const div = document.createElement('div');
+  div.style.color = "blue";
+  div.textContent = "I'm a blue div";
+  const container = document.querySelector('#list');
+  container.appendChild(div);
+  const main = document.querySelector(".main");
+  const start = document.querySelector("#start");
+  main.removeChild(start);
+}
 
 
 /* This function will randomly return the computer's
