@@ -4,18 +4,21 @@ const SCISSORS = 3;
 let gameState = 0;
 
 document.getElementById("start").addEventListener("click", gameOn);
+document.getElementById("rock").addEventListener("click", function () {
+  console.log(evaluateRound(ROCK, computerPlay()));
+});
+document.getElementById("paper").addEventListener("click", function () {
+  console.log(evaluateRound(PAPER, computerPlay()));
+});
+document.getElementById("scissors").addEventListener("click", function () {
+  console.log(evaluateRound(PAPER, computerPlay()));
+});
+
 
 /* occurs when player presses "Start Game" and activates game */
 function gameOn() {
   gameState = 1;
-  const div = document.createElement('div');
-  div.style.color = "blue";
-  div.textContent = "I'm a blue div";
-  const container = document.querySelector('#list');
-  container.appendChild(div);
-  const main = document.querySelector(".main");
-  const start = document.querySelector("#start");
-  main.removeChild(start);
+  document.getElementById("selectors").style.display = "block";
 }
 
 
@@ -30,27 +33,6 @@ function computerPlay() {
   } else {
     return SCISSORS;
   }
-}
-
-/* Human readable interface to play RPS */
-function playRound(playerChoice) {
-  let scrubbedInput = playerChoice.toLowerCase();
-  let numericalChoice;
-  switch (scrubbedInput) {
-    case "rock":
-      numericalChoice = ROCK;
-      break;
-    case "paper":
-      numericalChoice = PAPER;
-      break;
-    case "scissors":
-      numericalChoice = SCISSORS;
-      break;
-    default:
-      return "ERROR: invalid play";
-      break;
-  }
-  return evaluateRound(numericalChoice, computerPlay());
 }
 
 /* Evaluates a round of Rock, Paper, Scissors */
